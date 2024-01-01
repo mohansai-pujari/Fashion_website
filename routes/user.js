@@ -1,6 +1,6 @@
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 
-const router = require("express").Router;
+const router = require("express").Router();
 const User = require("../models/User");
 
 //Update user

@@ -1,4 +1,4 @@
-const router = require("express").Router;
+const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJs = require("crypto-js");
 const jwt = require("jsonwebtoken");

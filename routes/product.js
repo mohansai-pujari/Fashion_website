@@ -1,6 +1,6 @@
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 
-const router = require("express").Router;
+const router = require("express").Router();
 const Product = require("../models/Product");
 
 //Create product
@@ -19,7 +19,7 @@ router.post("/createproduct", verifyTokenAndAdmin, async (req, res) => {
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 
     try {
-        const updatedProduct = await Product.findById(req.params.id, {
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, {new: true});
         res.status(200).json(updatedProduct);
@@ -54,7 +54,7 @@ router.get("/findall", async (req, res) => {
     const qCategory = req.query.category;
     try {
         let products;
-        if(qNew) products = await Product.find.sort({createdAt: -1});
+        if(qNew) products = await Product.find.sort({createdAt: -1});    //.limit(5);
         else if(qCategory) products = await Product.find({categories: {
             $in: [qCategory]    //category is in array format
         }});
