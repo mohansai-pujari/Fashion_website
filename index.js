@@ -10,6 +10,8 @@ const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
 const cartRoute = require("./routes/cart");
+const stripeRoute = require("./routes/stripe");
+const cors = require("cors");
 
 mongoose.connect(process.env.MONGODB_CONNECT_URL).then(() => {
     console.log("Mongoose DB Connection successful")
@@ -23,6 +25,8 @@ app.use("/v1/auth", authRoute);
 app.use("/v1/products", productRoute);
 app.use("/v1/orders", orderRoute);
 app.use("/v1/carts", cartRoute);
+app.use("/v1/checkout", stripeRoute);
+app.use(cors());
 
 app.listen(process.env.PORT || 5006, () => {
     console.log("server started at port 5006");
